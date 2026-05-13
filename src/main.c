@@ -1,22 +1,12 @@
-#include "raylib.h"
+#include "../include/core/jogo.h"
 
-int main() {
-    InitWindow(1280, 720, "Vida de MC");
+int main(void)
+{
+    iniciarJogo();
 
-    SetTargetFPS(60);
+    executarJogo();
 
-    while (!WindowShouldClose()) {
-
-        BeginDrawing();
-
-        ClearBackground(BLACK);
-
-        DrawText("VIDA DE MC", 500, 300, 40, WHITE);
-
-        EndDrawing();
-    }
-
-    CloseWindow();
+    finalizarJogo();
 
     return 0;
 }
