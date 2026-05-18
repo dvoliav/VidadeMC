@@ -3,8 +3,9 @@
 
 typedef enum {
     TELA_INICIO,
-    TELA_MENU,
-    TELA_SAVE
+    TELA_SAVE,
+    TELA_CRIAR_MC,
+    TELA_MENU
 } TelaAtual;
 
 #endif

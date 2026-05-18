@@ -58,7 +58,7 @@ void atualizarTelaSave(void)
 
     if (botaoFoiClicado(botaoNovoJogo))
     {
-        mudarTela(TELA_MENU);
+        mudarTela(TELA_CRIAR_MC);
     }
 
     if (botaoFoiClicado(botaoCarregar))

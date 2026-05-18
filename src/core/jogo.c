@@ -4,6 +4,7 @@
 #include "core/telas.h"
 #include "telas/tela_inicio.h"
 #include "telas/tela_save.h"
+#include "telas/tela_criar_mc.h"
 
 #define LARGURA_TELA 1280
 #define ALTURA_TELA 720
@@ -57,6 +58,10 @@ void executarJogo(void)
 
                     break;
 
+                case TELA_CRIAR_MC:
+                    atualizarTelaCriarMc();
+                    desenharTelaCriarMc();
+                    break;
             }
 
         EndDrawing();
