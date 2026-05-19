@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "raylib.h"
-
+#include "minigames/show.h"
 #include "telas/tela_acoes.h"
 #include "core/jogo.h"
 #include "core/telas.h"
@@ -57,13 +57,16 @@ void atualizarTelaAcoes(void)
     }
 
     if (botaoFoiClicado(botaoShow))
+{
+    if (!acaoDaSemanaJaFoiFeita())
     {
-        if (!acaoDaSemanaJaFoiFeita())
-        {
-            definirMinigameAtual(MINIGAME_SHOW);
-            mudarTela(TELA_MINIGAME);
-        }
+        definirMinigameAtual(MINIGAME_SHOW);
+
+        iniciarMinigameShow();
+
+        mudarTela(TELA_MINIGAME);
     }
+}
 
     if (botaoFoiClicado(botaoVoltar))
     {

@@ -7,58 +7,49 @@
 
 #include "ui/botao.h"
 
+#include "minigames/show.h"
+
 static Texture2D background;
 
 static bool texturaCarregada = false;
-
-static Botao botaoSucesso = {
-    .area = {440, 320, 400, 80},
-    .texto = "SIMULAR SUCESSO"
-};
-
-static Botao botaoVoltar = {
-    .area = {440, 440, 400, 80},
-    .texto = "VOLTAR"
-};
 
 void atualizarTelaMinigame(void)
 {
     if (!texturaCarregada)
     {
-        background = LoadTexture(
-            "assets/Back.png"
-        );
+        background = LoadTexture("assets/Back.png");
 
         texturaCarregada = true;
     }
 
-    if (botaoFoiClicado(botaoSucesso))
+    int tipo = obterMinigameAtual();
+
+    switch (tipo)
     {
-        int tipo = obterMinigameAtual();
+        case MINIGAME_SHOW:
 
-        switch (tipo)
-        {
-            case MINIGAME_CRIAR_MUSICA:
-                aumentarFama(10);
-                break;
+            atualizarMinigameShow();
 
-            case MINIGAME_POSTAR_MUSICA:
-                aumentarFama(15);
-                break;
+            if (minigameShowFinalizado())
+            {
+                int pontos = obterPontuacaoShow();
 
-            case MINIGAME_SHOW:
-                aumentarFama(20);
-                break;
-        }
+                int porcentagem = (pontos * 100) / 1000;
 
-        marcarAcaoDaSemanaComoFeita();
+                float fator = calcularFatorSorte(porcentagem);
 
-        mudarTela(TELA_MENU);
-    }
+                int famaBase = 100;
 
-    if (botaoFoiClicado(botaoVoltar))
-    {
-        mudarTela(TELA_ACOES);
+                int famaFinal = (int)(famaBase * fator);
+
+                aumentarFama(famaFinal);
+
+                marcarAcaoDaSemanaComoFeita();
+
+                mudarTela(TELA_MENU);
+            }
+
+            break;
     }
 }
 
@@ -77,29 +68,14 @@ void desenharTelaMinigame(void)
         WHITE
     );
 
-    const char *titulo =
-        "MINIGAME EM DESENVOLVIMENTO";
+    int tipo = obterMinigameAtual();
 
-    int tamanhoFonte = 45;
+    switch (tipo)
+    {
+        case MINIGAME_SHOW:
 
-    int larguraTexto = MeasureText(
-        titulo,
-        tamanhoFonte
-    );
+            desenharMinigameShow();
 
-    DrawText(
-        titulo,
-
-        (1280 - larguraTexto) / 2,
-
-        140,
-
-        tamanhoFonte,
-
-        WHITE
-    );
-
-    desenharBotao(botaoSucesso);
-
-    desenharBotao(botaoVoltar);
+            break;
+    }
 }

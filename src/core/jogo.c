@@ -1,5 +1,8 @@
 #include "raylib.h"
 
+#include <stdlib.h>
+#include <time.h>
+
 #include "core/jogo.h"
 #include "core/telas.h"
 #include "telas/tela_inicio.h"
@@ -61,6 +64,8 @@ void aumentarFama(int quantidade)
 
 void iniciarJogo(void)
 {
+    srand(time(NULL));
+
     InitWindow(LARGURA_TELA, ALTURA_TELA, "Vida de MC");
 
     SetTargetFPS(60);
