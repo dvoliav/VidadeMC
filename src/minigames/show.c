@@ -7,6 +7,7 @@
 #include "raylib.h"
 
 #include "minigames/show.h"
+
 static float notaX;
 
 static float velocidadeNota;
@@ -15,7 +16,7 @@ static int pontuacao;
 
 static int tentativas;
 
-static int maxTentativas = 10;
+static int maxTentativas = 15;
 
 static bool finalizado = false;
 
@@ -45,6 +46,27 @@ void atualizarMinigameShow(void)
     if (finalizado)
     {
         return;
+    }
+
+    /*
+        DIFICULDADE DINÂMICA
+    */
+
+    if (tentativas >= 7 && tentativas < 11)
+    {
+        velocidadeNota = 10.0f;
+    }
+    else if (tentativas >= 11 && tentativas < 14)
+    {
+        velocidadeNota = 12.0f;
+    }
+    else if (tentativas >= 14)
+    {
+        velocidadeNota = 14.0f;
+    }
+    else
+    {
+        velocidadeNota = 8.0f;
     }
 
     notaX += velocidadeNota;
@@ -162,6 +184,26 @@ void desenharMinigameShow(void)
     DrawText(
         textoTentativas,
         930,
+        40,
+        30,
+        WHITE
+    );
+
+    /*
+        MOSTRAR VELOCIDADE ATUAL
+    */
+
+    char textoVelocidade[50];
+
+    sprintf(
+        textoVelocidade,
+        "VELOCIDADE: %.0f",
+        velocidadeNota
+    );
+
+    DrawText(
+        textoVelocidade,
+        500,
         40,
         30,
         WHITE
