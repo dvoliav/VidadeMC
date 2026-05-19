@@ -53,6 +53,10 @@ void desenharBotao(Botao botao)
 
     int tamanhoFonte = 36;
 
+    if (botao.area.width <= 280)
+    {
+        tamanhoFonte = 24;
+    }
     int larguraTexto = MeasureText(
         botao.texto,
         tamanhoFonte
@@ -63,7 +67,7 @@ void desenharBotao(Botao botao)
         botao.area.x +
         (botao.area.width - larguraTexto) / 2,
 
-        botao.area.y + 20,
+        botao.area.y + (botao.area.height - tamanhoFonte) / 2,
 
         tamanhoFonte,
         WHITE

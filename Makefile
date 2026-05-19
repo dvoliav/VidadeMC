@@ -15,7 +15,8 @@ src/core/jogo.c \
 src/telas/tela_inicio.c \
 src/ui/botao.c \
 src/telas/tela_save.c \
-src/telas/tela_criar_mc.c
+src/telas/tela_criar_mc.c \
+src/telas/tela_menu.c
 
 OUT = build/vidademc
 

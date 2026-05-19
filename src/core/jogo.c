@@ -5,12 +5,34 @@
 #include "telas/tela_inicio.h"
 #include "telas/tela_save.h"
 #include "telas/tela_criar_mc.h"
+#include "telas/tela_menu.h"
 
 #define LARGURA_TELA 1280
 #define ALTURA_TELA 720
-
+static int semanaAtual = 1;
 static TelaAtual telaAtual;
+static int famaAtual = 0;
 
+
+int obterSemanaAtual(void)
+{
+    return semanaAtual;
+}
+
+void avancarSemana(void)
+{
+    semanaAtual++;
+}
+
+int obterFamaAtual(void)
+{
+    return famaAtual;
+}
+
+void aumentarFama(int quantidade)
+{
+    famaAtual += quantidade;
+}
 
 void iniciarJogo(void)
 {
@@ -36,20 +58,6 @@ void executarJogo(void)
                     desenharTelaInicio();
                     break;
 
-                case TELA_MENU:
-
-                    ClearBackground((Color){20, 10, 30, 255});
-
-                    DrawText(
-                        "MENU PRINCIPAL",
-                        420,
-                        300,
-                        50,
-                        WHITE
-                    );
-
-                    break;
-
                 case TELA_SAVE:
 
                     atualizarTelaSave();
@@ -61,6 +69,11 @@ void executarJogo(void)
                 case TELA_CRIAR_MC:
                     atualizarTelaCriarMc();
                     desenharTelaCriarMc();
+                    break;
+                
+                case TELA_MENU:
+                    atualizarTelaMenu();
+                    desenharTelaMenu();
                     break;
             }
 
