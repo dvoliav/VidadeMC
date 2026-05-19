@@ -1,13 +1,20 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Iinclude -I/opt/homebrew/include
+CFLAGS = -Wall -Wextra -Iinclude
 
-LDFLAGS = -L/opt/homebrew/lib -lraylib \
--framework OpenGL \
--framework Cocoa \
--framework IOKit \
--framework CoreAudio \
--framework CoreVideo
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS += -I/opt/homebrew/include
+	LDFLAGS = -L/opt/homebrew/lib -lraylib \
+	-framework OpenGL \
+	-framework Cocoa \
+	-framework IOKit \
+	-framework CoreAudio \
+	-framework CoreVideo
+else
+	LDFLAGS = -lraylib -lm -lpthread -ldl -lrt -lX11
+endif
 
 SRC = \
 src/main.c \
@@ -16,7 +23,9 @@ src/telas/tela_inicio.c \
 src/ui/botao.c \
 src/telas/tela_save.c \
 src/telas/tela_criar_mc.c \
-src/telas/tela_menu.c
+src/telas/tela_menu.c \
+src/telas/tela_acoes.c \
+src/telas/tela_minigame.c
 
 OUT = build/vidademc
 

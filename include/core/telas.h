@@ -7,7 +7,14 @@ typedef enum {
     TELA_CRIAR_MC,
     TELA_MENU,
     TELA_ACOES,
-    TELA_RANKING
+    TELA_RANKING,
+    TELA_MINIGAME
 } TelaAtual;
+
+typedef enum {
+    MINIGAME_CRIAR_MUSICA,
+    MINIGAME_POSTAR_MUSICA,
+    MINIGAME_SHOW
+} TipoMinigame;
 
 #endif
