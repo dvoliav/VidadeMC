@@ -8,6 +8,14 @@
 
 #include "minigames/show.h"
 
+static Texture2D fundoShow;
+
+static Texture2D microfone;
+
+static Texture2D nota1;
+static Texture2D nota2;
+static Texture2D nota3;
+
 static float notaX;
 
 static float velocidadeNota;
@@ -22,12 +30,39 @@ static bool finalizado = false;
 
 static const float zonaPerfectX = 640;
 
-static const float zonaLargura = 80;
-
 static char resultadoAtual[20] = "";
+
+static bool assetsCarregados = false;
+
+void carregarAssetsShow(void)
+{
+    if (assetsCarregados)
+    {
+        return;
+    }
+
+    fundoShow =
+        LoadTexture("assets/show/background_show.png");
+
+    microfone =
+        LoadTexture("assets/show/microfone.png");
+
+    nota1 =
+        LoadTexture("assets/show/nota1.png");
+
+    nota2 =
+        LoadTexture("assets/show/nota2.png");
+
+    nota3 =
+        LoadTexture("assets/show/nota3.png");
+
+    assetsCarregados = true;
+}
 
 void iniciarMinigameShow(void)
 {
+    carregarAssetsShow();
+
     notaX = 0;
 
     velocidadeNota = 8.0f;
@@ -50,7 +85,7 @@ void atualizarMinigameShow(void)
 
     if (tentativas >= 5 && tentativas < 10)
     {
-    velocidadeNota = 10.0f;
+        velocidadeNota = 10.0f;
     }
     else if (tentativas >= 10 && tentativas < 13)
     {
@@ -58,11 +93,11 @@ void atualizarMinigameShow(void)
     }
     else if (tentativas >= 13)
     {
-    velocidadeNota = 14.0f;
+        velocidadeNota = 14.0f;
     }
     else
     {
-    velocidadeNota = 8.0f;
+        velocidadeNota = 8.0f;
     }
 
     notaX += velocidadeNota;
@@ -113,10 +148,24 @@ void atualizarMinigameShow(void)
 
 void desenharMinigameShow(void)
 {
+    DrawTexturePro(
+        fundoShow,
+
+        (Rectangle){0, 0, fundoShow.width, fundoShow.height},
+
+        (Rectangle){0, 0, 1280, 720},
+
+        (Vector2){0, 0},
+
+        0.0f,
+
+        WHITE
+    );
+
     DrawText(
         "APERTE ESPACO NO TEMPO CERTO",
         320,
-        120,
+        100,
         35,
         WHITE
     );
@@ -126,28 +175,58 @@ void desenharMinigameShow(void)
         350,
         880,
         10,
-        GRAY
+        WHITE
     );
 
-    DrawRectangle(
-        zonaPerfectX - (zonaLargura / 2),
-        320,
-        zonaLargura,
-        70,
-        GREEN
+    DrawTextureEx(
+        microfone,
+
+        (Vector2){
+            zonaPerfectX - 40,
+            280
+        },
+
+        0.0f,
+
+        0.15f,
+
+        WHITE
     );
 
-    DrawCircle(
-        notaX,
-        355,
-        15,
-        PINK
+    Texture2D notaAtual;
+
+    if (tentativas % 3 == 0)
+    {
+        notaAtual = nota1;
+    }
+    else if (tentativas % 3 == 1)
+    {
+        notaAtual = nota2;
+    }
+    else
+    {
+        notaAtual = nota3;
+    }
+
+    DrawTextureEx(
+        notaAtual,
+
+        (Vector2){
+            notaX,
+            310
+        },
+
+        0.0f,
+
+        0.12f,
+
+        WHITE
     );
 
     DrawText(
         resultadoAtual,
         560,
-        450,
+        470,
         40,
         WHITE
     );
@@ -184,10 +263,6 @@ void desenharMinigameShow(void)
         30,
         WHITE
     );
-
-    /*
-        MOSTRAR VELOCIDADE ATUAL
-    */
 
     char textoVelocidade[50];
 

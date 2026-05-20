@@ -14,10 +14,15 @@
 
 #define LARGURA_TELA 1280
 #define ALTURA_TELA 720
+
 static int semanaAtual = 1;
+
 static TelaAtual telaAtual;
+
 static int famaAtual = 0;
+
 static int minigameAtual;
+
 static bool acaoRealizadaNaSemana = false;
 
 bool acaoDaSemanaJaFoiFeita(void)
@@ -40,7 +45,6 @@ int obterMinigameAtual(void)
     return minigameAtual;
 }
 
-
 int obterSemanaAtual(void)
 {
     return semanaAtual;
@@ -49,6 +53,7 @@ int obterSemanaAtual(void)
 void avancarSemana(void)
 {
     semanaAtual++;
+
     acaoRealizadaNaSemana = false;
 }
 
@@ -103,7 +108,7 @@ void executarJogo(void)
                     desenharTelaCriarMc();
 
                     break;
-                
+
                 case TELA_MENU:
 
                     atualizarTelaMenu();
