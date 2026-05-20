@@ -48,25 +48,21 @@ void atualizarMinigameShow(void)
         return;
     }
 
-    /*
-        DIFICULDADE DINÂMICA
-    */
-
-    if (tentativas >= 7 && tentativas < 11)
+    if (tentativas >= 5 && tentativas < 10)
     {
-        velocidadeNota = 10.0f;
+    velocidadeNota = 10.0f;
     }
-    else if (tentativas >= 11 && tentativas < 14)
+    else if (tentativas >= 10 && tentativas < 13)
     {
         velocidadeNota = 12.0f;
     }
-    else if (tentativas >= 14)
+    else if (tentativas >= 13)
     {
-        velocidadeNota = 14.0f;
+    velocidadeNota = 14.0f;
     }
     else
     {
-        velocidadeNota = 8.0f;
+    velocidadeNota = 8.0f;
     }
 
     notaX += velocidadeNota;
