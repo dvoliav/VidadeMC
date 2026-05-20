@@ -28,7 +28,9 @@ src/telas/tela_criar_mc.c \
 src/telas/tela_menu.c \
 src/telas/tela_acoes.c \
 src/telas/tela_minigame.c \
-src/minigames/show.c
+src/minigames/show.c \
+src/core/musicas.c \
+src/minigames/ritmo.c \
 
 OUT = build/vidademc
 

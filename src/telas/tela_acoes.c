@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include "minigames/ritmo.h"
 #include "raylib.h"
 #include "minigames/show.h"
 #include "telas/tela_acoes.h"
@@ -43,6 +43,9 @@ void atualizarTelaAcoes(void)
         if (!acaoDaSemanaJaFoiFeita())
         {
             definirMinigameAtual(MINIGAME_CRIAR_MUSICA);
+
+            iniciarMinigameRitmo();
+
             mudarTela(TELA_MINIGAME);
         }
     }
