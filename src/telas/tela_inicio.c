@@ -27,7 +27,7 @@ void atualizarTelaInicio(void)
     if (!texturaCarregada)
     {
         background = LoadTexture(
-            "assets/BackgroundVidadeMC.png"
+            "assets/BackgroundVidaDeMC.png"
         );
 
         texturaCarregada = true;
