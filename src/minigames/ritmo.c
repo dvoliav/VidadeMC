@@ -122,6 +122,8 @@ void atualizarMinigameRitmo(void)
         tentativaAtual++;
 
         gerarNovaLetra();
+
+        return;
     }
 
     int tecla = GetKeyPressed();
@@ -152,7 +154,7 @@ void atualizarMinigameRitmo(void)
         }
         else
         {
-            strcpy(feedback, "ERROU");
+            strcpy(feedback, "MISS");
         }
 
         tentativaAtual++;

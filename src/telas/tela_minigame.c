@@ -11,6 +11,8 @@
 
 #include "minigames/show.h"
 #include <string.h>
+static Texture2D backgroundResultadoMusica;
+static bool backgroundResultadoCarregado = false;
 
 static Texture2D background;
 
@@ -44,7 +46,15 @@ void atualizarTelaMinigame(void)
 
         texturaCarregada = true;
     }
+    if (!backgroundResultadoCarregado)
+    {
+        backgroundResultadoMusica =
+            LoadTexture(
+                "assets/background_resultado_musica.png"
+            );
 
+        backgroundResultadoCarregado = true;
+    }
     if (telaResultado)
     {
         if (obterMinigameAtual() == MINIGAME_CRIAR_MUSICA)
@@ -179,69 +189,173 @@ void desenharTelaMinigame(void)
         if (obterMinigameAtual()
         == MINIGAME_CRIAR_MUSICA)
     {
-        DrawRectangle(
+    DrawTexturePro(
+        backgroundResultadoMusica,
+
+        (Rectangle){
+            0,
+            0,
+            backgroundResultadoMusica.width,
+            backgroundResultadoMusica.height
+        },
+
+        (Rectangle){
             0,
             0,
             1280,
-            720,
-            Fade(BLACK, 0.6f)
-        );
+            720
+        },
 
-        DrawText(
-            "SUA MUSICA FOI CRIADA!",
-            260,
-            100,
-            50,
-            WHITE
-        );
+        (Vector2){0, 0},
 
-        char textoQualidade[100];
+        0.0f,
 
-        sprintf(
-            textoQualidade,
-            "QUALIDADE: %s",
-            obterQualidadeMusica()
-        );
+        WHITE
+    );
 
-        DrawText(
-            textoQualidade,
-            390,
-            230,
-            40,
-            WHITE
-        );
+    DrawRectangle(
+        0,
+        0,
+        1280,
+        720,
+        Fade(BLACK, 0.45f)
+    );
 
-        DrawText(
-            "DIGITE O NOME DA MUSICA:",
-            300,
-            340,
-            35,
-            WHITE
-        );
+    DrawRectangleRounded(
+        (Rectangle){250, 120, 780, 420},
+        0.08f,
+        10,
+        Fade(BLACK, 0.55f)
+    );
 
-        DrawRectangle(
-            320,
-            420,
-            650,
-            70,
-            Fade(WHITE, 0.2f)
-        );
+    DrawRectangleRoundedLines(
+        (Rectangle){250, 120, 780, 420},
+        0.08f,
+        10,
+        Fade(PINK, 0.8f)
+    );
 
-        DrawText(
-            nomeMusica,
-            340,
-            440,
-            35,
-            WHITE
-        );
+    const char* titulo =
+        "SUA MUSICA FOI CRIADA!";
 
-        DrawText(
-            "APERTE ENTER PARA CONFIRMAR",
-            300,
-            560,
-            30,
-            GRAY
-        );
+    int larguraTitulo =
+        MeasureText(titulo, 42);
+
+    DrawText(
+        titulo,
+
+        (1280 - larguraTitulo) / 2,
+
+        170,
+
+        42,
+
+        WHITE
+    );
+
+    char textoQualidade[100];
+
+    sprintf(
+        textoQualidade,
+        "QUALIDADE: %s",
+        obterQualidadeMusica()
+    );
+
+    Color corQualidade = WHITE;
+
+    if (strcmp(obterQualidadeMusica(), "RUIM") == 0)
+    {
+        corQualidade = GRAY;
+    }
+    else if (strcmp(obterQualidadeMusica(), "MEDIA") == 0)
+    {
+        corQualidade = SKYBLUE;
+    }
+    else if (strcmp(obterQualidadeMusica(), "BOA") == 0)
+    {
+        corQualidade = GREEN;
+    }
+    else if (strcmp(obterQualidadeMusica(), "HYPE") == 0)
+    {
+        corQualidade = PURPLE;
+    }
+    else if (strcmp(obterQualidadeMusica(), "HIT") == 0)
+    {
+        corQualidade = GOLD;
+    }
+
+int larguraQualidade =
+    MeasureText(textoQualidade, 36);
+
+    DrawText(
+        textoQualidade,
+
+        (1280 - larguraQualidade) / 2,
+
+        250,
+
+        36,
+
+        corQualidade
+    );
+
+const char* textoNome =
+    "DIGITE O NOME DA MUSICA";
+
+int larguraNome =
+    MeasureText(textoNome, 30);
+
+    DrawText(
+        textoNome,
+
+        (1280 - larguraNome) / 2,
+
+        325,
+
+        30,
+
+        WHITE
+    );
+
+    DrawRectangleRounded(
+        (Rectangle){340, 380, 600, 65},
+        0.15f,
+        10,
+        Fade(BLACK, 0.5f)
+    );
+
+    DrawRectangleRoundedLines(
+        (Rectangle){340, 370, 600, 65},
+        0.15f,
+        10,
+        Fade(PINK, 0.8f)
+    );
+
+    DrawText(
+        nomeMusica,
+        365,
+        388,
+        32,
+        WHITE
+    );
+
+    const char* textoConfirmar =
+        "APERTE ENTER PARA CONFIRMAR";
+
+    int larguraConfirmar =
+        MeasureText(textoConfirmar, 22);
+
+    DrawText(
+        textoConfirmar,
+
+        (1280 - larguraConfirmar) / 2,
+
+        470,
+
+        22,
+
+        GRAY
+    );
 
         return;
     }
