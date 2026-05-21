@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "raylib.h"
 
 #include "telas/tela_minigame.h"
