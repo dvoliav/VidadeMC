@@ -12,7 +12,7 @@ static bool texturaCarregada = false;
 
 static Botao botaoAcoes = {
     .area = {440, 230, 400, 80},
-    .texto = "ACOES"
+    .texto = "CARREIRA  "
 };
 
 static Botao botaoRanking = {
@@ -27,7 +27,7 @@ static Botao botaoVoltar = {
 
 static Botao botaoAvancarSemana = {
     .area = {980, 620, 260, 55},
-    .texto = "AVANCAR SEMANA"
+    .texto = "DESCANSAR SEMANA"
 };
 
 void atualizarTelaMenu(void)
