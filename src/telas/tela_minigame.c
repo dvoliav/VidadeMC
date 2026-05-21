@@ -11,6 +11,7 @@
 
 #include "minigames/show.h"
 #include <string.h>
+#include <ctype.h>
 static Texture2D backgroundResultadoMusica;
 static bool backgroundResultadoCarregado = false;
 
@@ -20,6 +21,19 @@ static bool texturaCarregada = false;
 static char nomeMusica[50] = "";
 
 static int tamanhoNome = 0;
+
+bool nomeValido(void)
+{
+    for (int i = 0; nomeMusica[i] != '\0'; i++)
+    {
+        if (!isspace(nomeMusica[i]))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 
 
@@ -92,19 +106,22 @@ void atualizarTelaMinigame(void)
 
         if (IsKeyPressed(KEY_ENTER))
         {
-            adicionarMusica(
-                nomeMusica,
-                obterPontuacaoRitmo(),
-                obterQualidadeMusica()
-            );
+            if (nomeValido())
+            {
+                adicionarMusica(
+                    nomeMusica,
+                    obterPontuacaoRitmo(),
+                    obterQualidadeMusica()
+                );
 
-            strcpy(nomeMusica, "");
+                strcpy(nomeMusica, "");
 
-            tamanhoNome = 0;
+                tamanhoNome = 0;
 
-            telaResultado = false;
+                telaResultado = false;
 
-            mudarTela(TELA_MENU);
+                mudarTela(TELA_MENU);
+            }
         }
     }
         if (botaoFoiClicado(botaoConcluir))
