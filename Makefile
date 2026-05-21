@@ -31,6 +31,8 @@ src/telas/tela_minigame.c \
 src/minigames/show.c \
 src/core/musicas.c \
 src/minigames/ritmo.c \
+src/core/assets.c \
+
 
 OUT = build/vidademc
 

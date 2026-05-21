@@ -5,7 +5,7 @@
 #include "core/jogo.h"
 #include "core/telas.h"
 #include "ui/botao.h"
-
+#include "core/assets.h"
 static char nomeMc[30] = "";
 static int quantidadeLetras = 0;
 
@@ -66,14 +66,30 @@ void desenharTelaCriarMc(void)
     );
 
     const char *titulo = "CRIE SEU MC";
-    int tamanhoFonteTitulo = 50;
-    int larguraTitulo = MeasureText(titulo, tamanhoFonteTitulo);
 
-    DrawText(
+    int tamanhoFonteTitulo = 50;
+
+    float larguraTitulo = MeasureTextEx(
+        fonteMenu,
         titulo,
-        (1280 - larguraTitulo) / 2,
-        100,
         tamanhoFonteTitulo,
+        2
+    ).x;
+
+    DrawTextEx(
+        fonteMenu,
+
+        titulo,
+
+        (Vector2){
+            (1280 - larguraTitulo) / 2,
+            100
+        },
+
+        tamanhoFonteTitulo,
+
+        2,
+
         WHITE
     );
 
@@ -91,23 +107,41 @@ void desenharTelaCriarMc(void)
         WHITE
     );
 
-    DrawText(
+    DrawTextEx(
+        fonteMenu,
+
         nomeMc,
-        370,
-        280,
+
+        (Vector2){
+            370,
+            280
+        },
+
         35,
+
+        2,
+
         WHITE
     );
 
     if (quantidadeLetras == 0)
     {
-        DrawText(
-            "Digite o nome artistico...",
+    DrawTextEx(
+        fonteMenu,
+
+        "Digite o nome artistico...",
+
+        (Vector2){
             370,
-            280,
-            35,
-            (Color){180, 180, 180, 255}
-        );
+            280
+        },
+
+        35,
+
+        2,
+
+        (Color){180, 180, 180, 255}
+    );
     }
 
     desenharBotao(botaoConfirmar);

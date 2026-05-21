@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "ui/botao.h"
+#include "core/assets.h"
 
 bool botaoFoiClicado(Botao botao)
 {
@@ -57,19 +58,30 @@ void desenharBotao(Botao botao)
     {
         tamanhoFonte = 24;
     }
-    int larguraTexto = MeasureText(
+    float larguraTexto = MeasureTextEx(
+        fonteMenu,
         botao.texto,
-        tamanhoFonte
-    );
+        tamanhoFonte,
+        2
+    ).x;
 
-    DrawText(
+    DrawTextEx(
+        fonteMenu,
+
         botao.texto,
-        botao.area.x +
-        (botao.area.width - larguraTexto) / 2,
 
-        botao.area.y + (botao.area.height - tamanhoFonte) / 2,
+        (Vector2){
+            botao.area.x +
+            (botao.area.width - larguraTexto) / 2,
+
+            botao.area.y +
+            (botao.area.height - tamanhoFonte) / 2
+        },
 
         tamanhoFonte,
+
+        2,
+
         WHITE
     );
 }

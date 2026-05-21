@@ -6,7 +6,7 @@
 #include "core/telas.h"
 
 #include "ui/botao.h"
-
+#include "core/assets.h"
 
 static Texture2D background;
 static bool texturaCarregada = false;
@@ -99,19 +99,26 @@ void desenharTelaSave(void)
     );
     int tamanhoFonte = 40;
 
-    int larguraTexto = MeasureText(
+    float larguraTexto = MeasureTextEx(
+        fonteMenu,
         textoTitulo,
-        tamanhoFonte
-    );
+        tamanhoFonte,
+        2
+    ).x;
 
-    DrawText(
+    DrawTextEx(
+        fonteMenu,
+
         textoTitulo,
 
-        (1280 - larguraTexto) / 2,
-
-        120,
+        (Vector2){
+            (1280 - larguraTexto) / 2,
+            120
+        },
 
         tamanhoFonte,
+
+        2,
 
         WHITE
     );

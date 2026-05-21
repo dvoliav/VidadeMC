@@ -6,7 +6,7 @@
 #include "core/jogo.h"
 #include "core/telas.h"
 #include "ui/botao.h"
-
+#include "core/assets.h"
 static Texture2D background;
 static bool texturaCarregada = false;
 
@@ -72,13 +72,26 @@ void desenharTelaMenu(void)
 
     const char *titulo = "MENU PRINCIPAL";
     int tamanhoFonteTitulo = 45;
-    int larguraTitulo = MeasureText(titulo, tamanhoFonteTitulo);
-
-    DrawText(
+    float larguraTitulo = MeasureTextEx(
+        fonteMenu,
         titulo,
-        (1280 - larguraTitulo) / 2,
-        100,
         tamanhoFonteTitulo,
+        2
+    ).x;
+    DrawTextEx(
+        fonteMenu,
+
+        titulo,
+
+        (Vector2){
+            (1280 - larguraTitulo) / 2,
+            100
+        },
+
+        tamanhoFonteTitulo,
+
+        2,
+
         WHITE
     );
 
@@ -86,24 +99,46 @@ void desenharTelaMenu(void)
     snprintf(textoSemana, sizeof(textoSemana), "Semana %d", obterSemanaAtual());
 
     int tamanhoFonteSemana = 28;
-    int larguraSemana = MeasureText(textoSemana, tamanhoFonteSemana);
-
-    DrawText(
+    float larguraSemana = MeasureTextEx(
+        fonteMenu,
         textoSemana,
-        1280 - larguraSemana - 40,
-        35,
         tamanhoFonteSemana,
+        2
+    ).x;
+    DrawTextEx(
+        fonteMenu,
+
+        textoSemana,
+
+        (Vector2){
+            1280 - larguraSemana - 40,
+            35
+        },
+
+        tamanhoFonteSemana,
+
+        2,
+
         WHITE
     );
 
     char textoFama[30];
     snprintf(textoFama, sizeof(textoFama), "Fama: %d", obterFamaAtual());
 
-    DrawText(
+    DrawTextEx(
+        fonteMenu,
+
         textoFama,
-        40,
-        35,
+
+        (Vector2){
+            40,
+            35
+        },
+
         28,
+
+        2,
+
         WHITE
     );
 

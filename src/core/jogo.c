@@ -11,7 +11,7 @@
 #include "telas/tela_menu.h"
 #include "telas/tela_acoes.h"
 #include "telas/tela_minigame.h"
-
+#include "core/assets.h"
 #define LARGURA_TELA 1280
 #define ALTURA_TELA 720
 
@@ -69,10 +69,11 @@ void aumentarFama(int quantidade)
 
 void iniciarJogo(void)
 {
+    
     srand(time(NULL));
 
     InitWindow(LARGURA_TELA, ALTURA_TELA, "Vida de MC");
-
+    carregarAssetsGlobais();
     SetTargetFPS(60);
 
     telaAtual = TELA_INICIO;

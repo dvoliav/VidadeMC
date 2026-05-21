@@ -6,7 +6,7 @@
 #include "core/jogo.h"
 #include "core/telas.h"
 #include "ui/botao.h"
-
+#include "core/assets.h"
 static Texture2D background;
 static bool texturaCarregada = false;
 
@@ -89,17 +89,32 @@ void desenharTelaAcoes(void)
     );
 
     const char *titulo = "ESCOLHA UMA ACAO";
-    int tamanhoFonteTitulo = 45;
-    int larguraTitulo = MeasureText(titulo, tamanhoFonteTitulo);
 
-    DrawText(
+    int tamanhoFonteTitulo = 45;
+
+    float larguraTitulo = MeasureTextEx(
+        fonteMenu,
         titulo,
-        (1280 - larguraTitulo) / 2,
-        90,
         tamanhoFonteTitulo,
+        2
+    ).x;
+
+    DrawTextEx(
+        fonteMenu,
+
+        titulo,
+
+        (Vector2){
+            (1280 - larguraTitulo) / 2,
+            90
+        },
+
+        tamanhoFonteTitulo,
+
+        2,
+
         WHITE
     );
-
     desenharBotao(botaoCriarMusica);
     desenharBotao(botaoPostarMusica);
     desenharBotao(botaoShow);
