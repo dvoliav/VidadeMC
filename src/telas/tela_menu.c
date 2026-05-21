@@ -146,4 +146,64 @@ void desenharTelaMenu(void)
     desenharBotao(botaoRanking);
     desenharBotao(botaoVoltar);
     desenharBotao(botaoAvancarSemana);
+        if (acaoDaSemanaJaFoiFeita())
+    {
+        const char* aviso =
+            "HORA DE DESCANSAR...";
+
+        float larguraAviso =
+            MeasureTextEx(
+                fonteMenu,
+                aviso,
+                24,
+                2
+            ).x;
+
+        DrawRectangleRounded(
+            (Rectangle){
+                (1280 - larguraAviso - 50) / 2,
+                620,
+                larguraAviso + 50,
+                50
+            },
+
+            0.3f,
+
+            10,
+
+            Fade(BLACK, 0.55f)
+        );
+
+        DrawRectangleRoundedLines(
+            (Rectangle){
+                (1280 - larguraAviso - 50) / 2,
+                620,
+                larguraAviso + 50,
+                50
+            },
+
+            0.3f,
+
+            10,
+
+            Fade(PINK, 0.8f)
+        );
+
+        DrawTextEx(
+            fonteMenu,
+
+            aviso,
+
+            (Vector2){
+                (1280 - larguraAviso) / 2,
+                633
+            },
+
+            24,
+
+            2,
+
+            WHITE
+        );
+    }
 }
